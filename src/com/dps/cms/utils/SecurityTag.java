@@ -13,16 +13,17 @@ import com.dps.cms.model.Role;
 /**
  * 权限限制类
  * 
- * @author Administrator
- * 
+ * @author yangq(qi.yang.cn@gmail.com)
  */
 public class SecurityTag extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 资源
 	 */
 	private int resource;
+
 	/**
 	 * 操作
 	 */
@@ -32,19 +33,18 @@ public class SecurityTag extends TagSupport {
 	public int doStartTag() throws JspException {
 
 		HttpSession session = pageContext.getSession();
-		Object o =  session.getAttribute("admin");
-		if(o!=null){
-			Manager m =	(Manager)o;
+		Object o = session.getAttribute("admin");
+		if (o != null) {
+			Manager m = (Manager) o;
 			List<Role> roles = m.getRoles();
-			if(check(roles)){
+			if (check(roles)) {
 				return EVAL_PAGE;
 			}
 		}
 
 		return SKIP_BODY;
 	}
-	
-	
+
 	public int getResource() {
 		return resource;
 	}
@@ -53,23 +53,19 @@ public class SecurityTag extends TagSupport {
 		this.resource = resource;
 	}
 
-
-
 	public int getAction() {
 		return action;
 	}
-
-
 
 	public void setAction(int action) {
 		this.action = action;
 	}
 
-
-
 	/*
 	 * 检测用户执行权限
+	 * 
 	 * @param roles
+	 * 
 	 * @return
 	 */
 	private boolean check(List<Role> roles) {
@@ -87,7 +83,7 @@ public class SecurityTag extends TagSupport {
 							if ((p.getAcl() & action) == action) {
 								// 判断角色优先级
 								flag = true;
-							}else{
+							} else {
 								flag = false;
 							}
 							rule = r.getRule();

@@ -46,6 +46,7 @@
 					}
 				);
 			});
+			
 		//文件上传
 		function upload(){
 			$.ajaxFileUpload({
