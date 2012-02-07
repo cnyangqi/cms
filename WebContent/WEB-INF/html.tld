@@ -8,19 +8,20 @@
 
 	<function>
 		<name>delHTMLTag</name>
-		<function-class>com.scxxs.cms.utils.FilterHTMLTag</function-class>
+		<function-class>com.dps.cms.utils.FilterHTMLTag</function-class>
 		<function-signature>java.lang.String delHTMLTag(java.lang.String)</function-signature>
 	</function>
 
 	<function>
 		<name>isPic</name>
-		<function-class>com.scxxs.cms.utils.FilterHTMLTag</function-class>
+		<function-class>com.dps.cms.utils.FilterHTMLTag</function-class>
 		<function-signature>boolean isPic(java.lang.String)</function-signature>
 	</function>
 
 	<function>
 		<name>hasPermission</name>
-		<function-class>com.scxxs.cms.utils.FilterHTMLTag</function-class>
+		<function-class>com.dps.cms.utils.FilterHTMLTag</function-class>
 		<function-signature>boolean hasPermission(int,int)</function-signature>
 	</function>
+	
 </taglib>
