@@ -46,9 +46,10 @@ public class IndexPicAction extends BaseAction {
 	 * @throws IOException
 	 */
 	@At("/admin/indexpic/upload")
-	@AdaptBy(type = UploadAdaptor.class, args = { "./tmp" })
-	public void upload(@Param("template") TempFile tf, ServletContext context,
-			HttpServletResponse resp) throws IOException {
+	@AdaptBy(type = UploadAdaptor.class, args = {"./tmp"})
+	public void upload(	@Param("template") TempFile tf,
+						ServletContext context,
+						HttpServletResponse resp) throws IOException {
 
 		File file = tf.getFile();
 
@@ -56,8 +57,7 @@ public class IndexPicAction extends BaseAction {
 
 		String relpath = context.getRealPath("/");
 
-		String prefix = new SimpleDateFormat("yyyyMMddHHmmss")
-				.format(new Date());
+		String prefix = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
 		String uppath = "indexpic/" + prefix + filename;
 
@@ -107,8 +107,7 @@ public class IndexPicAction extends BaseAction {
 		}
 
 		if (flag) {
-			return "[{success:true}," + Json.toJson(pic, JsonFormat.full())
-					+ "]";
+			return "[{success:true}," + Json.toJson(pic, JsonFormat.full()) + "]";
 		}
 
 		return "[{success:false}]";
@@ -123,8 +122,9 @@ public class IndexPicAction extends BaseAction {
 	 */
 	@At("/admin/indexpic/del")
 	@Ok("json")
-	public String del(@Param("id") int id,
-			@Param("currentPage") int currentPage, ServletContext context) {
+	public String del(	@Param("id") int id,
+						@Param("currentPage") int currentPage,
+						ServletContext context) {
 
 		// IndexPicDao dao = new IndexPicDao(ioc);
 
@@ -146,7 +146,9 @@ public class IndexPicAction extends BaseAction {
 		StringBuffer sb = new StringBuffer("[");
 		if (maxPage > 1) {
 			List<IndexPic> pics = basicDao.searchByPage(IndexPic.class,
-					(currentPage + 1), SystemContext.PAGE_SIZE, "sortNumber");
+														(currentPage + 1),
+														SystemContext.PAGE_SIZE,
+														"sortNumber");
 			for (IndexPic p : pics) {
 				sb.append(Json.toJson(p));
 				// 第一次执行完就停止执行
@@ -171,14 +173,14 @@ public class IndexPicAction extends BaseAction {
 	 */
 	@At("/admin/indexpic/delByIds")
 	@Ok("json")
-	public String delByIds(@Param("ids") String ids,
-			@Param("currentPage") int currentPage, @Param("size") int size,
-			ServletContext context) {
+	public String delByIds(	@Param("ids") String ids,
+							@Param("currentPage") int currentPage,
+							@Param("size") int size,
+							ServletContext context) {
 
 		// IndexPicDao dao = new IndexPicDao(ioc);
 
-		List<IndexPic> pics = basicDao.searchByIds(IndexPic.class, ids,
-				"sortNumber");
+		List<IndexPic> pics = basicDao.searchByIds(IndexPic.class, ids, "sortNumber");
 
 		String path = context.getRealPath("/");
 
@@ -197,8 +199,10 @@ public class IndexPicAction extends BaseAction {
 		String str = "";
 		StringBuffer sb = new StringBuffer("[");
 		if (maxPage > 1) {
-			List<IndexPic> pices = basicDao.searchByPage(IndexPic.class,
-					(currentPage + 1), SystemContext.PAGE_SIZE, "sortNumber");
+			List<IndexPic> pices = basicDao.searchByPage(	IndexPic.class,
+															(currentPage + 1),
+															SystemContext.PAGE_SIZE,
+															"sortNumber");
 			int i = 0;
 			for (IndexPic t : pices) {
 				if (i == size) {
@@ -229,13 +233,14 @@ public class IndexPicAction extends BaseAction {
 	 * @return
 	 */
 	@At("/admin/indexpic")
-	public View list(@Param("currentPage") int currentPage,
-			String type, HttpServletRequest req) {
+	public View list(@Param("currentPage") int currentPage, String type, HttpServletRequest req) {
 
 		// IndexPicDao dao = new IndexPicDao(ioc);
 
-		List<IndexPic> result = basicDao.searchByPage(IndexPic.class,
-				currentPage, SystemContext.PAGE_SIZE, "sortNumber");
+		List<IndexPic> result = basicDao.searchByPage(	IndexPic.class,
+														currentPage,
+														SystemContext.PAGE_SIZE,
+														"sortNumber");
 		int count = basicDao.searchCount(IndexPic.class);
 
 		int maxPage = basicDao.maxPageSize(count, SystemContext.PAGE_SIZE);

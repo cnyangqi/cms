@@ -4,6 +4,11 @@ import org.nutz.ioc.loader.annotation.Inject;
 
 import com.dps.cms.dao.BasicDao;
 
+/**
+ * Action 基类
+ * 
+ * @author yangq(qi.yang.cn@gmail.com)
+ */
 public class BaseAction {
 
 	@Inject
